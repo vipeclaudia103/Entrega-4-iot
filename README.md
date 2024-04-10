@@ -21,10 +21,14 @@ Iniciar el serrvicio
 sudo service influxdb start
 ```
 
-token de influx:
+token de python:
 ```
-SXzum1org1t_mYU5dxdPB7o9sQHLqtv3govXNySAFcmWNuQhwT4_PaooIeKmX2g3F0bHdzApWNenWx6sG9tErA==
+iH8lRT8epPlzBWGya3EkKwOCKEa2fSj9SAtTGY_ytNHwrye73hvakM98MDoe7He9sAYTO34jRzJgb8_QsvSVCg==
 ```
+
+token para T2 node-red:
+mucnRpp7iz9TRcdxet-eF_9uEfQzs9CwpiSHDybr-M8BwW8Ovfv_I1Q76y4ZIdu650OP8YSWeSSQgIMf3P9DIg==
+
 Para guardar la varariable den token en el entorno ejecutar:
 ```bash
 export INFLUXDB_TOKEN=hiwt2t-GCL8w6qS9HZFZ6oDfwqYUdRscZ3uX8urlPb_CBvW298IEE19zaeJU4JEEmc4LBWTuT2aR_bcAiA9p0g==

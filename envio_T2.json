@@ -1,0 +1,100 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "59e850a805236181",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "Molinos",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "cb9a8ccd570f656f",
+        "type": "influxdb batch",
+        "z": "f6f2187d.f17ca8",
+        "influxdb": "59e850a805236181",
+        "precision": "",
+        "retentionPolicy": "",
+        "name": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "CVP",
+        "bucket": "Molinos",
+        "x": 680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "98865a4be9485a80",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "envio desde node red",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "2b2bc13a6428ab74"
+            ]
+        ]
+    },
+    {
+        "id": "2b2bc13a6428ab74",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 1",
+        "func": "// Generar un número aleatorio en un rango específico\nfunction getRandomNumber(min, max) {\n    return Math.random() * (max - min) + min;\n}\nvar lv_active_power = getRandomNumber(0, 100); // Potencia activa LV (kW)\nvar wind_speed = getRandomNumber(0, 25); // Velocidad del viento (m/s)\nvar theoretical_power_curve = getRandomNumber(0, 500); // Curva de potencia teórica (KWh)\nvar wind_direction = getRandomNumber(0, 360); // Dirección del viento (°)\n\n// Construir el punto de datos\nmsg.payload = [\n    {\n        measurement: \"turbina\",\n        fields: {\n            lv_active_power: lv_active_power,\n            wind_speed: wind_speed,\n            theoretical_power_curve: theoretical_power_curve,\n            wind_direction: wind_direction\n        },\n        tags: {\n            turbine_id: \"T2\"\n        },\n        timestamp: new Date()\n    }\n]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 240,
+        "wires": [
+            [
+                "cb9a8ccd570f656f"
+            ]
+        ]
+    }
+]

@@ -30,11 +30,13 @@ def load_csv_to_influxdb(csv_file):
             
             # Crear un punto de datos
             point = Point("turbina") \
-                .time(timestamp, 'ms') \
-                .field("lv_active_power", lv_active_power) \
-                .field("wind_speed", wind_speed) \
-                .field("theoretical_power_curve", theoretical_power_curve) \
-                .field("wind_direction", wind_direction)
+                    .time(timestamp, 'ms') \
+                    .field("lv_active_power", lv_active_power) \
+                    .field("wind_speed", wind_speed) \
+                    .field("theoretical_power_curve", theoretical_power_curve) \
+                    .field("wind_direction", wind_direction) \
+                    .tag("Turbina", "T1")
+                
             time.sleep(1)
             # Escribir el punto de datos en InfluxDB
             write_api.write(bucket=bucket, org=org, record=point)
