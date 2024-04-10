@@ -34,6 +34,7 @@ Para guardar la varariable den token en el entorno ejecutar:
 export INFLUXDB_TOKEN=hiwt2t-GCL8w6qS9HZFZ6oDfwqYUdRscZ3uX8urlPb_CBvW298IEE19zaeJU4JEEmc4LBWTuT2aR_bcAiA9p0g==
 ```
 
+
 ## Instalar libreria de InfluxDB client
 Para enviar los datos a InfluxDB es necesario instalar la libreria de python correspondiente.
 
