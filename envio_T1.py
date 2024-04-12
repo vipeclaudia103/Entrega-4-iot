@@ -35,7 +35,7 @@ def load_csv_to_influxdb(csv_file):
                     .field("wind_speed", wind_speed) \
                     .field("theoretical_power_curve", theoretical_power_curve) \
                     .field("wind_direction", wind_direction) \
-                    .tag("Turbina", "T1")
+                    .tag("turbine_id", "T1")
                 
             time.sleep(1)
             # Escribir el punto de datos en InfluxDB
@@ -48,4 +48,3 @@ csv_file_path = "Entrega-4-iot/T1.csv"
 while True:
     load_csv_to_influxdb(csv_file_path)
     print("Datos cargados en InfluxDB")
-      # Esperar 10 minutos antes de cargar los datos nuevamente
