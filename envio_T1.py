@@ -9,7 +9,7 @@ import time
 token = "iH8lRT8epPlzBWGya3EkKwOCKEa2fSj9SAtTGY_ytNHwrye73hvakM98MDoe7He9sAYTO34jRzJgb8_QsvSVCg=="
 org = "CVP"
 bucket = "Molinos"
-url = "http://localhost:8086"
+url = "http://172.28.141.208:8086/"
 
 
 client = InfluxDBClient(url=url, token=token,  org=org)
